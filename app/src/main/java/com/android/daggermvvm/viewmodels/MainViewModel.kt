@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.daggermvvm.models.Product
 import com.android.daggermvvm.repository.ProductRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
-    private val repository: ProductRepository, private val randomize: Randomize
-) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: ProductRepository) : ViewModel() {
 
     val productsLiveData: LiveData<List<Product>>
         get() = repository.products
@@ -23,10 +23,4 @@ class MainViewModel @Inject constructor(
         }
     }
 
-}
-
-class Randomize @Inject constructor() {
-    fun doAction() {
-        //todo
-    }
 }
